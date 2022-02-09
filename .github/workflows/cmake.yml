@@ -40,13 +40,13 @@ jobs:
       run: ctest -C ${{env.BUILD_TYPE}}
     - name: Deploy (not linux)
       uses: actions/upload-artifact@v2
-      if: not ${{matrix.os}} == "ubuntu"
+      if: ${{ matrix.os =! "ubuntu" }}
       with:
         name: ictree-${{matrix.os}}
         path: ./build
     - name: Deploy (linux)
       uses: actions/upload-artifact@v2
-      if: ${{matrix.os}} == "ubuntu"
+      if: ${{ matrix.os == "ubuntu" }}
       with:
         name: ictree-gnulinux
         path: ./build
